@@ -1,6 +1,13 @@
 defmodule Servy.Handler do
   def handle(request)do
-        
+    #conv = parse(request)
+    #conv = route(conv)   
+    #format_response(conv)
+
+    request 
+    |> parse 
+    |> route 
+    |> format_response
   end
 
   def parse(request) do
@@ -36,15 +43,6 @@ Accept: */*
 
 """
 
-expected_response = """
-HTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length: 20
-
-Bears, Lions, Tigers
-
-"""
-
-response = Servy.Handler.handler(request)
+response = Servy.Handler.handle(request)
 
 IO.puts response
