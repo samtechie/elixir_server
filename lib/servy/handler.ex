@@ -18,11 +18,6 @@ defmodule Servy.Handler do
     |> format_response
   end
 
-
-
-
-
-
   def route(%{method: "GET", path: "/wildthings"} = conv) do
     %{conv | status: 200, resp_body: "Bears, Lions, Tigers"}
   end
