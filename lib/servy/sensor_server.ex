@@ -1,3 +1,8 @@
+defmodule State do
+  defstruct sensor_data: %{},
+            refresh_interval: :timer.minutes(60)
+end
+
 defmodule Servy.SensorServer do
 
   @name :sensor_server
@@ -9,7 +14,8 @@ defmodule Servy.SensorServer do
 
   def start_link(interval) do
     IO.puts "Starting the sensor server with #{ interval } min refresh..."
-    GenServer.start_link(__MODULE__, %{}, name: @name)
+    initial_state = %State{refresh_interval: interval}
+    GenServer.start_link(__MODULE__, initial_state, name: @name)
   end
 
   def get_sensor_data do

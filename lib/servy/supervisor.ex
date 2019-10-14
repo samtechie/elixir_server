@@ -1,18 +1,17 @@
-defmodule Servy.ServicesSupervisor do
+defmodule Servy.Supervisor do
   use Supervisor
 
-  def start_link(_arg) do
-    IO.puts "starting the services supervisor..."
+  def start_link do
+    IO.puts "starting THE supervisor..."
     Supervisor.start_link(__MODULE__, :ok, name: __MODULE__)
   end
 
   def init(:ok) do
     children = [
-      Servy.PledgeServer,
-      { Servy.SensorServer, 60}
+      Servy.KickStarter,
+      Servy.ServicesSupervisor
     ]
 
     Supervisor.init(children, strategy: :one_for_one)
   end
-
 end
